@@ -1,10 +1,28 @@
-def calculate_total(income, expense):
-    return income - expense
+import sys
+from PySide6.QtWidgets import QApplication, QDialog
+from main_window_ui import Ui_MainWindow
+from PySide6.QtWidgets import QMainWindow
 
-if __name__ == '__main__':
-    salary = int(input("Please imput your salary (monthly): "))
-    rent = int(input("How much u spend on rent: "))
-    print("You make around " + str(calculate_total(salary, rent)) + " a month")
-    if calculate_total(salary, rent) > 1000:
-        print("You kinda making bank ngl, keep up the drip my g")
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+        
+        self.ui.addIncome.clicked.connect(self.on_add_income_clicked)
+
+    
+
+    def on_add_income_clicked(self):
+        incomeDialog = QDialog()
+        incomeDialog.exec()
+        print("Add income button clicked!")
+
+
+if __name__ == "__main__":
+    import sys
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec())
 
